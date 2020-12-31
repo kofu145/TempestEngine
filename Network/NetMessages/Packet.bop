@@ -1,0 +1,24 @@
+﻿enum PacketType
+{
+	TestMessage = 0;
+	EntityPositionUpdate = 1;
+}
+
+struct TestMessageData
+{
+	string msg;
+
+}
+
+struct EntityPositionData
+{
+	float64 x;
+	float64 y;
+}
+
+message Packet
+{
+	1 -> PacketType type; 
+	2 -> TestMessageData testMessageData;
+	3 -> EntityPositionData entityPositionData;
+}
