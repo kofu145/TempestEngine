@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
-// pascalcase for public, functions, and class names, camelcase for private fields
+
 namespace TestLibraryEngine
 {
     public class Entity
@@ -30,7 +30,6 @@ namespace TestLibraryEngine
         {
             components[typeof(T)] = component;
         }
-
 
     }
 }

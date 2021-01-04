@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TestLibraryEngine
+namespace TestLibraryEngine.Components
+
 {
     public class Player : IComponent
     {
