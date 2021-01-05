@@ -13,6 +13,12 @@ namespace TestLibraryEngine.Components
         // is circle or not or something
         // naabb
         // isTrigger: pass in a function?
+
+        public Collider(Rectangle boundingBox)
+        {
+            this.BoundingBox = boundingBox;
+        }
+
         public Collider Copy()
         {
             // shallow copy, remove later pls

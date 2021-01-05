@@ -13,13 +13,15 @@ namespace TestLibraryEngine.Components
 
         public double Width => Texture.Width;
         public double Height => Texture.Height;
+        public SpriteEffects SpriteEffect;
 
         public Vector2 Origin;
         
-        public Sprite(Texture2D texture)
+        public Sprite(Texture2D texture, SpriteEffects spriteEffect=SpriteEffects.None)
         {
             this.Texture = texture;
             this.Origin = new Vector2(texture.Width / 2, texture.Height / 2);
+            this.SpriteEffect = spriteEffect;
         }
 
         public Sprite Copy()

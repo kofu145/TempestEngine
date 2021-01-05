@@ -11,27 +11,33 @@ namespace TestLibraryEngine.Components
     public class Camera : IComponent
     {
         public Matrix transformMatrix;
-        private Viewport view;
-        private Vector2 center;
+
         public float Zoom { get; set; }
         
         public Rectangle Bounds { get; set; }
         public Rectangle RenderTarget { get; set; }
 
 
-        public double WorldWidth { get; private set; }
-        public double WorldHeight { get; private set; }
 
-        public Color DefaultColor = Color.CornflowerBlue;
+        // public Color DefaultColor = Color.CornflowerBlue;
 
 
-        public Camera(double worldWidth, double worldHeight, float zoom, Viewport viewPort)
+        public Camera(float zoom, Viewport viewPort, Rectangle renderTarget)
         {
-            this.WorldWidth = worldWidth;
-            this.WorldHeight = worldHeight;
             this.Zoom = zoom;
             this.Bounds = viewPort.Bounds;
-            
+            this.RenderTarget = renderTarget;
+            this.transformMatrix = 
+                Matrix.CreateTranslation(new Vector3((int)0, (int)0, 0)) *
+
+                Matrix.CreateRotationZ(0) *
+                Matrix.CreateScale(Zoom, Zoom, 1) *
+                Matrix.CreateTranslation(new Vector3(
+                    Bounds.Width * 0.5f,
+                    Bounds.Height * 0.5f, 0
+                    )
+                );
+
         }
 
         //public Camera (Viewport viewPort)
