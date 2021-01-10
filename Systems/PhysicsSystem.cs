@@ -27,7 +27,6 @@ namespace TestLibraryEngine.Systems
                 updatedTransforms[entity.id].Position = 
                     ApplyVelocity(updatedTransforms[entity.id].Position, rigidbody.Velocity, gameTime);
 
-
             }
 
             // grab all entities with transform, collider
@@ -39,7 +38,6 @@ namespace TestLibraryEngine.Systems
 
             // for loop over the entities with a transform, rigidbody
             // and collider, and resolve collisions
-
 
             foreach (var self in collidableRigidbodyEntities)
             {
@@ -119,9 +117,19 @@ namespace TestLibraryEngine.Systems
             // apply movement
             foreach(var entity in rigidbodyEntities)
             {
+                // apply gravity as well?
                 entity.AddComponent(updatedTransforms[entity.id]);
                 var rigidbody = entity.GetComponent<Rigidbody>();
-                rigidbody.Velocity = Vector2.Zero;
+                if (rigidbody.ApplyGravity)
+                {
+                    rigidbody.Velocity += new Vector2(0, 9.8f);
+                }
+                else
+                {
+                    rigidbody.Velocity = Vector2.Zero;
+
+                }
+
             }
         }
 
