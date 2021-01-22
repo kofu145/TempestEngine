@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace LibraryEngine
 {
-    public static class IComponentExtensions
+    public enum Command
     {
-        
+        right = 1,
+        left,
+        up,
+        down,
+        jump
     }
 }

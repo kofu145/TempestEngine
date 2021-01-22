@@ -2,9 +2,9 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
-using TestLibraryEngine.Components;
+using LibraryEngine.Components;
 
-namespace TestLibraryEngine
+namespace LibraryEngine
 {
     public class Entity
     {

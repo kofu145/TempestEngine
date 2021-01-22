@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using RainwayIPC.Models;
+//using RainwayIPC.Models;
+using FlatSharp;
 
-namespace TestLibraryEngine.Network
+namespace LibraryEngine.Network
 
 {
     public static class TcpClientExtensions
@@ -16,10 +14,14 @@ namespace TestLibraryEngine.Network
 
 		public static void SendMessage(this TcpClient socket, Packet packet)
         {
-			var bytes = packet.Encode();
+			int maxBytesNeeded = FlatBufferSerializer.Default.GetMaxSize(packet);
+			byte[] bytes = new byte[maxBytesNeeded];
+			int bytesWritten = FlatBufferSerializer.Default.Serialize(packet, bytes);
 
 			var stream = socket.GetStream();
 			stream.Write(bytes);
+
+			//packet = new Packet
 
         }
 
@@ -48,7 +50,8 @@ namespace TestLibraryEngine.Network
 
 					try
 					{
-						message = Packet.Decode(bytes.ToArray());	
+						message = FlatBufferSerializer.Default.Parse<Packet>((Memory<byte>)bytes.ToArray());
+						
 					}
 					catch (Exception e)
 					{

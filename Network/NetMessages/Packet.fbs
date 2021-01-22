@@ -1,0 +1,23 @@
+﻿namespace LibraryEngine.Network;
+
+enum PacketType : byte { TestMessage, Input, Sync }
+
+table TestMessageData
+{
+	msg:string;
+}
+
+table InputData
+{
+	inputBuffer:[uint32];
+}
+
+union Data { TestMessageData, InputData }
+
+table Packet
+{
+	type:PacketType;
+	data:Data;
+}
+
+// root_type Packet;

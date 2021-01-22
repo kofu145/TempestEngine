@@ -5,13 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestLibraryEngine.Components;
+using LibraryEngine.Components;
 
-namespace TestLibraryEngine.Systems
+namespace LibraryEngine.Systems
 {
-    public class CameraSystem
+    public class CameraSystem : ISystem
     {
-        
+        private Viewport viewPort;
+        public CameraSystem(Viewport viewport)
+        {
+            this.viewPort = viewport;
+        }
+
         private void UpdateMatrix(Entity cameraEntity)
         {
             // updating the transform matrix
@@ -33,7 +38,7 @@ namespace TestLibraryEngine.Systems
 
         
 
-        public void Update(Scene scene, Viewport viewPort)
+        public void Update(Scene scene, GameTime gameTime)
         {
             var cameraEntities = scene.Entities
                 .Where(e => e.HasComponent<Camera>())

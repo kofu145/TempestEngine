@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+﻿<Project Sdk="Microsoft.NET.Sdk"> 
+  <PropertyGroup> 
+    <TargetFramework>net5.0</TargetFramework> 
   </PropertyGroup>
-  <ItemGroup>
+  <ItemGroup> 
     <PackageReference Include="bebop" Version="2.0.3" />
     <PackageReference Include="bebop-tools" Version="2.0.3">
       <PrivateAssets>all</PrivateAssets>

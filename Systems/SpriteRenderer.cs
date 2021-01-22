@@ -4,14 +4,21 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using TestLibraryEngine.Components;
+using LibraryEngine.Components;
 
 
-namespace TestLibraryEngine
+namespace LibraryEngine.Systems
 {
-    public class SpriteRenderer
+    public class SpriteRenderer : ISystem
     {
-        public void Render(Scene scene, SpriteBatch spriteBatch)
+        private SpriteBatch spriteBatch;
+        public SpriteRenderer(SpriteBatch spriteBatch)
+        {
+            this.spriteBatch = spriteBatch;
+        }
+
+
+        public void Update(Scene scene, GameTime gameTime)
         {
             var spriteEntities = scene.Entities
                 .Where(e => e.HasComponent<Sprite>())

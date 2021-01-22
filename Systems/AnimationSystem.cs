@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using TestLibraryEngine.Components;
+using LibraryEngine.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TestLibraryEngine.Systems
+namespace LibraryEngine.Systems
 {
     public class AnimationSystem : ISystem
     {

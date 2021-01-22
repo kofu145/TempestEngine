@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>c35cb4bb-c02e-480c-a0a0-fb624029e29e</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="bebop" Version="2.0.5" />
+    <PackageReference Include="bebop-tools" Version="2.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>    
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.0" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+	<ItemGroup>
+		<Bebop Include="**/*.bop" OutputDir="./Models/" OutputFile="IpcModels.g.cs" Namespace="RainwayIPC.Models" />
+</ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="FlatSharp" Version="4.1.0" />
+      <PackageReference Include="FlatSharp.Compiler" Version="4.1.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="FlatSharp.Runtime" Version="4.1.0" />
+      <PackageReference Include="FlatSharp.Unsafe" Version="4.1.0" />
+      <PackageReference Include="Grpc" Version="2.32.0" />
+    </ItemGroup>
+    
+	
+  <ItemGroup>
+    <FlatSharpSchema Include="Network\NetMessages\Packet.fbs" />
+
+  </ItemGroup>
+</Project>

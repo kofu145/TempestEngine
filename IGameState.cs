@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TestLibraryEngine
+namespace LibraryEngine
 {
     public interface IGameState
     {
@@ -22,6 +22,6 @@ namespace TestLibraryEngine
         void Update(GameTime gameTime);
 
         // Draws the game
-        void Draw(SpriteBatch spriteBatch);
+        void Draw(GameTime gameTime);
     }
 }

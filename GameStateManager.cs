@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TestLibraryEngine
+namespace LibraryEngine
 {
     public class GameStateManager
     {
@@ -95,11 +95,11 @@ namespace TestLibraryEngine
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(GameTime gameTime)
         {
             if (screens.Count > 0)
             {
-                screens.Peek().Draw(spriteBatch);
+                screens.Peek().Draw(gameTime);
             }
         }
 

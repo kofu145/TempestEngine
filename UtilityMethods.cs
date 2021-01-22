@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FlatSharp;
 
-namespace TestLibraryEngine
+namespace LibraryEngine
 {
     public static class UtilityMethods
     {
@@ -53,7 +54,20 @@ namespace TestLibraryEngine
             return Math.Atan2(vector.Y, vector.X);
         }
 
-        
-        
+        /// <summary>
+        /// Serializes any object into FlatBuffer format (don't use this pls)
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static byte[] Serialize(object target)
+        {
+            int maxBytesNeeded = FlatBufferSerializer.Default.GetMaxSize(target);
+            byte[] buffer = new byte[maxBytesNeeded];
+            int bytesWritten = FlatBufferSerializer.Default.Serialize(target, buffer);
+            // keep in mind bytesWritten ig
+            return buffer;
+        }
+
+
     }
 }

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TestLibraryEngine.Components
+namespace LibraryEngine.Components
 
 {
     public class Transform : IComponent

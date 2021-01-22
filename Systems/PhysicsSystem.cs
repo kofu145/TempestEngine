@@ -4,12 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestLibraryEngine.Components;
+using LibraryEngine.Components;
 
-namespace TestLibraryEngine.Systems
+namespace LibraryEngine.Systems
 {
     public class PhysicsSystem : ISystem
     {
+        public float Gravity;
+
+        public PhysicsSystem(float gravity)
+        {
+            this.Gravity = gravity;
+        }
+
         public void Update(Scene scene, GameTime gameTime)
         {
 
@@ -19,13 +26,15 @@ namespace TestLibraryEngine.Systems
                .Where(e => e.HasComponent<Rigidbody>())
                .Where(e => e.HasComponent<Transform>());
 
+            
+
             var updatedTransforms = new Dictionary<Guid, Transform>();
             foreach (var entity in rigidbodyEntities)
             {
                 updatedTransforms[entity.id] = entity.GetComponent<Transform>().Copy();
                 var rigidbody = entity.GetComponent<Rigidbody>();
-                updatedTransforms[entity.id].Position = 
-                    ApplyVelocity(updatedTransforms[entity.id].Position, rigidbody.Velocity, gameTime);
+                updatedTransforms[entity.id].Position =
+                    ApplyMovement(entity, updatedTransforms[entity.id].Position, gameTime);
 
             }
 
@@ -91,22 +100,27 @@ namespace TestLibraryEngine.Systems
 
                         // top
                         updatedTransforms[self.id].Position.Y -= (newColliderInWorldSpace.Bottom - otherColliderInWorldSpace.Top);
+                        self.GetComponent<Rigidbody>().Velocity.Y = 0;
+                        //self.GetComponent<Rigidbody>().Acceleration = Vector2.Zero;
 
                     }
                     else if (oldColliderInWorldSpace.Top >= otherColliderInWorldSpace.Bottom)
                     {
                         // bottom
                         updatedTransforms[self.id].Position.Y -= (newColliderInWorldSpace.Top - otherColliderInWorldSpace.Bottom);
+                        self.GetComponent<Rigidbody>().Velocity.Y = 0;
                     }
                     else if (oldColliderInWorldSpace.Right <= otherColliderInWorldSpace.Left)
                     {
                         // left
                         updatedTransforms[self.id].Position.X -= (newColliderInWorldSpace.Right - otherColliderInWorldSpace.Left);
+                        self.GetComponent<Rigidbody>().Velocity.X = 0;
                     }
                     else if (oldColliderInWorldSpace.Left >= otherColliderInWorldSpace.Right)
                     {
                         // right
                         updatedTransforms[self.id].Position.X -= (newColliderInWorldSpace.Left - otherColliderInWorldSpace.Right);
+                        self.GetComponent<Rigidbody>().Velocity.X = 0;
                     }
 
 
@@ -120,23 +134,20 @@ namespace TestLibraryEngine.Systems
                 // apply gravity as well?
                 entity.AddComponent(updatedTransforms[entity.id]);
                 var rigidbody = entity.GetComponent<Rigidbody>();
-                if (rigidbody.ApplyGravity)
-                {
-                    rigidbody.Velocity += new Vector2(0, 9.8f);
-                }
-                else
-                {
-                    rigidbody.Velocity = Vector2.Zero;
-
-                }
 
             }
         }
 
-
-        private Vector2 ApplyVelocity(Vector2 position, Vector2 velocity, GameTime gameTime)
+        
+        private Vector2 ApplyMovement(Entity entity, Vector2 position, GameTime gameTime)
         {
-            return position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            var rigidbody = entity.GetComponent<Rigidbody>();
+            // rigidbody.Acceleration = rigidbody.Force / rigidbody.Mass;
+            
+
+            rigidbody.Velocity += (rigidbody.Acceleration + (rigidbody.ApplyGravity ? new Vector2(0, Gravity) : Vector2.Zero)) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            
+            return position += rigidbody.Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
     }
 }

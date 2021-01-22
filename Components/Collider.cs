@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestLibraryEngine.Components
+namespace LibraryEngine.Components
 {
     public class Collider : IComponent
     {
